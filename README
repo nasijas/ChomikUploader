@@ -1,40 +1,34 @@
-INSTALACJA:
-Potrzebny jest python2.* (najlepiej 2.6 lub 2.7) oraz system Linux
-Aby zainstalowac skrypt odpalamy polecenie (z uprawnieniami administratora):
+INSTALACIÓN:
+
+Se requiere python2. * (Recomendable 2.6 o 2.7) y Linux
+Para instalar este script, ejecuta el setup.py (con privilegios de administrador):
 python setup.py install
-Jesli nie mozemy zdobyc praw administratora mozemy uzywac programu bez instalacji. Wtedy uruchamiamy plik main.py z katalogu src.
-W przypadku systemu Windows nie instalujemy skryptu. Zamiast polecenia "chomik" wpisujemy "python main.py" w katalogu src.
+Si no tenemos derechos de administrador, se puede usar el programa sin instalar. Simplemente, inicia main.py desde el directorio src.
+En Windows, no es necesario instalar el script. Simplemente escribe "python main.py" en el directorio src.
 
 
-PRZYKŁAD UŻYCIA:
-Wypisanie helpa:
+EJEMPLO DE USO (chomik o main.py segun el tipo de instalación): 
+Mostrar ayuda:
 chomik -h
 
-1. Wysłanie wszystkich plikow z katalogu i podkatalogow do chomikowego katalogu
-chomik -r "/katalog_na_chomiku/podkatalog" "sciezka_do_katalogu_na_dysku"
-chomik -r "/katalog1/katalog2/katalog3" "/home/nick/Dokumenty"
+1. Subida recursiva. Subir todos el contenido de una carpeta en nuestro ordenador a nuestra cuenta en chomik.
+chomik -r "/carpeta_chomik/subcarpeta" "ruta en nuestro disco"
+chomik -r "/directorio1/directorio2/directorio3" "/home/nick/Documentos"
 
-2. Wyslanie pojedynczego pliku na chomika
-chomik -u "/katalog1/katalog2/katalog3" "/home/nick/Dokumenty/plik.txt"
+2. Subida simple. Sube un fichero a nuestra cuenta chomik.
+chomik -u "/directorio1/directorio2/directorio3" "/home/nick/Documentos/documento.txt"
 
-3. Logowanie sie do chomika (i wysylanie plikow):
-chomik -l nazwa_chomika -p haslo -r "/katalog1/katalog2/katalog3" "./"
+3. Subida embebiendo las credenciales en el propio comando.
+chomik -l usuario_chomik -p contraseña -r "/directorio1/directorio/directorio3" "./"
 
-lub
+4. Subir mas de archivo al mismo tiempo (threads opcion -t)
+chomik -t 5 -r "/directorio1/directorio/directorio3" "/home/nick/Documentos"
 
-chomik -r "/katalog1/katalog2/katalog3" "./"
-Podaj nazwe uzytkownika:
-nazwa_chomik
-Podaj haslo:
-haslo
+5. Obtener mas informacion detallada (debug opcion -d)
+chomik -d -r "/directorio1/directorio/directorio3" "/home/nick/Documentos"
 
-4. Wysylanie wiekszej liczby plikow na raz (np. 5 w tym samym momencie)
-chomik -t 5 -r "/katalog1/katalog2/katalog3" "/home/nick/Dokumenty"
-
-5. Wypisywanie szczegolowych informacji o bledach (opcja -d)
-chomik -d -r "/katalog1/katalog2/katalog3" "/home/nick/Dokumenty"
-
-UWAGA:
-Skrypt, przy wysylaniu katalogu (parametr -r), tworzy pliki uploaded.txt i notuploaded.txt.
-uploaded.txt - pliki poprawnie wyslane; jezeli w katalogu, ktory wysylamy, znajduje sie plik uploaded.txt, to program wczytuje z tego pliku, ktore pliki zostaly juz wyslane i pomija je przy wysylaniu.
-notuploaded.txt - pliki niewyslane (na skutek bledow)
+IMPORTANTE:
+Al usar la subidad recursiva (parámetro -r), este script crea los archivos uploaded.txt y notuploaded.txt.
+uploaded.txt - archivos subidos correctamente.
+notuploaded.txt - archivos que no se subieron correctamente (debido a errores).
+Al intentar volver a subir el script busca en el fichero notuploaded.txt y trata de subir los ficheros que dieron problemas.

@@ -1,37 +1,29 @@
-URUCHOMIENIE:
-Należy uruchomić konsolę windowsową (pod windowsem xp Uruchom -> cmd)
+EJECUCIÓN:
+Desde la consola de Windows (cmd)
 
 
-PRZYKŁAD UŻYCIA:
-Wypisanie pomocy:
-chomik.exe -h
+EJEMPLO DE USO (chomik o main.py segun el tipo de instalación): 
+Mostrar ayuda:
+chomik -h
 
-1. Wysłanie wszystkich plikow z katalogu i podkatalogow do chomikowego katalogu
-chomik.exe -r "/katalog_na_chomiku/podkatalog" "sciezka_do_katalogu_na_dysku"
-chomik.exe -r "/katalog1/katalog2/katalog3" "C:/home/nick/Dokumenty"
+1. Subida recursiva. Subir todos el contenido de una carpeta en nuestro ordenador a nuestra cuenta en chomik.
+chomik -r "/carpeta_chomik/subcarpeta" "ruta en nuestro disco"
+chomik -r "/directorio1/directorio2/directorio3" "/home/nick/Documentos"
 
-2. Wyslanie pojedynczego pliku na chomika
-chomik.exe -u "/katalog1/katalog2/katalog3" "C:\sample_dir\Dokumenty\plik.txt"
+2. Subida simple. Sube un fichero a nuestra cuenta chomik.
+chomik -u "/directorio1/directorio2/directorio3" "/home/nick/Documentos/documento.txt"
 
-3. Logowanie sie do chomika (i wysylanie plikow):
-chomik.exe -l nazwa_chomika -p haslo -r "/katalog1/katalog2/katalog3" "C:\sample_dir\Dokumenty\"
+3. Subida embebiendo las credenciales en el propio comando.
+chomik -l usuario_chomik -p contraseña -r "/directorio1/directorio/directorio3" "./"
 
-lub
+4. Subir mas de archivo al mismo tiempo (threads opcion -t)
+chomik -t 5 -r "/directorio1/directorio/directorio3" "/home/nick/Documentos"
 
-chomik.exe -r "/katalog1/katalog2/katalog3" "C:\sample_dir\Dokumenty\"
->> Podaj nazwe uzytkownika:
-<< nazwa_chomik
->> Podaj haslo:
-<< haslo
+5. Obtener mas informacion detallada (debug opcion -d)
+chomik -d -r "/directorio1/directorio/directorio3" "/home/nick/Documentos"
 
-4. Wysylanie wiekszej liczby plikow na raz (np. 5 w tym samym momencie)
-chomik.exe -t 5 -r "/katalog1/katalog2/katalog3" "C:\sample_dir\Dokumenty\"
-
-5. Wypisywanie szczegolowych informacji o bledach (opcja -d)
-chomik.exe -d -r "/katalog1/katalog2/katalog3" "C:\sample_dir\Dokumenty\"
-
-
-UWAGA:
-Skrypt, przy wysylaniu katalogu (parametr -r), tworzy pliki uploaded.txt i notuploaded.txt.
-uploaded.txt - pliki poprawnie wyslane; jezeli w katalogu, ktory wysylamy, znajduje sie plik uploaded.txt, to program wczytuje z tego pliku, ktore pliki zostaly juz wyslane i pomija je przy wysylaniu.
-notuploaded.txt - pliki niewyslane (na skutek bledow)
+IMPORTANTE:
+Al usar la subidad recursiva (parámetro -r), este script crea los archivos uploaded.txt y notuploaded.txt.
+uploaded.txt - archivos subidos correctamente.
+notuploaded.txt - archivos que no se subieron correctamente (debido a errores).
+Al intentar volver a subir el script busca en el fichero notuploaded.txt y trata de subir los ficheros que dieron problemas.
